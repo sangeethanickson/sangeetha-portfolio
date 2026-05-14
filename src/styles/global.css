@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg: #0b0f19;
+  --surface: #111827;
+  --ring: rgba(139, 92, 246, 0.45);
+}
+
+/* scroll-behavior: smooth intentionally omitted — Lenis owns all scrolling.
+   Native browser smooth-scroll and Lenis compete, causing visible jitter. */
+
+html, body, #root {
+  background: var(--bg);
+  min-height: 100%;
+}
+
+body {
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* Prevent mobile browsers from hijacking scroll-start with elastic bounce */
+  overscroll-behavior: none;
+}
+
+*::selection {
+  background: rgba(139, 92, 246, 0.35);
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0b0f19; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4f46e5, #8b5cf6, #22d3ee);
+  border-radius: 999px;
+  border: 2px solid #0b0f19;
+}
+
+/* Smooth focus */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Reusable layers */
+@layer components {
+  .glass {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.06];
+  }
+  .glass-strong {
+    @apply bg-white/[0.05] backdrop-blur-2xl border border-white/[0.08];
+  }
+  .hairline {
+    @apply border border-white/[0.06];
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-text;
+  }
+  .text-gradient-accent {
+    @apply bg-clip-text text-transparent bg-gradient-accent;
+    background-size: 200% 200%;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium glass text-ink-muted;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-300 will-change-transform select-none;
+  }
+  .btn-primary {
+    @apply btn text-white;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6 50%, #22d3ee);
+    background-size: 200% 200%;
+    box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.55);
+  }
+  .btn-primary:hover {
+    background-position: 100% 0%;
+    transform: translateY(-1px);
+    box-shadow: 0 16px 40px -12px rgba(139, 92, 246, 0.65);
+  }
+  .btn-ghost {
+    @apply btn text-ink hairline bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/[0.12];
+  }
+  .section {
+    @apply relative py-16 md:py-16;
+  }
+  .section-title {
+    @apply font-display text-3xl md:text-5xl font-bold tracking-tight;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-ink-muted font-medium;
+  }
+  .card {
+    /* transition-all removed: only transition compositor-safe properties.
+       border-color and background-color don't trigger layout, only paint. */
+    @apply relative rounded-2xl glass shadow-soft p-6 md:p-8;
+    transition: border-color 200ms ease, background-color 200ms ease, transform 200ms ease;
+  }
+  .card-hover {
+    /* Promote to own compositor layer so hover transform is free */
+    will-change: transform;
+  }
+  .card-hover:hover {
+    @apply border-white/[0.14] bg-white/[0.05];
+    transform: translateY(-2px);
+  }
+  .card-hover:not(:hover) {
+    transform: translateY(0);
+  }
+}
+
+/* Marquee mask */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+/* Subtle grid background */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: -1px -1px;
+}
+
+/* Spotlight (cursor glow) */
+/* Uses will-change:transform so the compositor owns it completely.
+   The gradient re-paint is on its own layer — zero scroll impact. */
+.spotlight {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  /* No transition here — JS lerp handles the interpolation */
+  will-change: transform;
+  contain: strict;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* GPU acceleration helpers */
+.gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Contain paint for sections — stops section repaints from cascading */
+.section {
+  contain: layout style;
+}
+
+/* Marquee — promote to compositor, prevent layout thrash */
+.marquee-track {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Fixed elements should have their own stacking context */
+.fixed-layer {
+  transform: translateZ(0);
+  will-change: transform;
+}
