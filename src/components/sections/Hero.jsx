@@ -41,7 +41,7 @@ export default function Hero() {
 
             <motion.h1
               variants={fadeUp}
-              className="mt-5 font-display font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl leading-[1.02]"
+              className="mt-5 font-display font-extrabold tracking-tight text-3xl sm:text-5xl md:text-5xl leading-[1.02]"
             >
               Hi, I’m{' '}
               <span className="text-gradient-accent">Sangeetha N</span>
