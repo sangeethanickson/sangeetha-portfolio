@@ -7,7 +7,7 @@ Built with React 18, Vite, Tailwind CSS, Framer Motion, Lenis smooth scroll, and
 
 ## ✨ Features
 
-- **Premium dark UI** with glassmorphism, animated gradients, and subtle particles
+- **Premium dark UI** with glassmorphism, animated gradients, and subtle particles 
 - **Hero** with animated typewriter, floating tech chips, gradient ring portrait, status badge
 - **About** with animated stat cards and engineering pillars
 - **Skills** with categorized animated progress bars + dynamic tech marquee
