@@ -48,9 +48,9 @@ export default function Contact() {
           initial="hidden"
           whileInView="visible"
           viewport={VIEWPORT}
-          className="mt-14 grid lg:grid-cols-[1fr_1.2fr] gap-6"
+          className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.2fr] lg:gap-8"
         >
-          <motion.div variants={fadeUp} className="card">
+          <motion.div variants={fadeUp} className="card min-w-0">
             <h3 className="font-display text-lg font-semibold">Direct channels</h3>
             <p className="mt-2 text-sm text-ink-muted">
               Reach out wherever's easiest — I check email, LinkedIn, and GitHub regularly.
@@ -60,15 +60,15 @@ export default function Contact() {
               <button
                 type="button"
                 onClick={onCopy}
-                className="w-full flex items-center justify-between gap-3 rounded-xl glass px-4 py-3 hover:bg-white/[0.05] transition"
+                className="w-full flex items-center justify-between gap-3 rounded-xl glass px-4 py-3 hover:bg-white/[0.05] transition text-left min-w-0"
               >
-                <span className="flex items-center gap-3 text-sm">
-                  <span className="h-9 w-9 rounded-lg bg-gradient-accent flex items-center justify-center text-white">
+                <span className="flex min-w-0 flex-1 items-center gap-3 text-sm">
+                  <span className="h-9 w-9 shrink-0 rounded-lg bg-gradient-accent flex items-center justify-center text-white">
                     <Mail size={16} />
                   </span>
-                  <span className="font-medium">{profile.email}</span>
+                  <span className="font-medium break-words [overflow-wrap:anywhere]">{profile.email}</span>
                 </span>
-                <span className="inline-flex items-center gap-1.5 text-xs text-ink-muted">
+                <span className="inline-flex shrink-0 items-center gap-1.5 text-xs text-ink-muted">
                   {copied ? <><Check size={14} /> Copied</> : <><Copy size={14} /> Copy</>}
                 </span>
               </button>
@@ -77,46 +77,46 @@ export default function Contact() {
                 href={profile.socials.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full flex items-center justify-between gap-3 rounded-xl glass px-4 py-3 hover:bg-white/[0.05] transition"
+                className="w-full flex items-center justify-between gap-3 rounded-xl glass px-4 py-3 hover:bg-white/[0.05] transition min-w-0"
               >
-                <span className="flex items-center gap-3 text-sm">
-                  <span className="h-9 w-9 rounded-lg glass flex items-center justify-center">
+                <span className="flex min-w-0 flex-1 items-center gap-3 text-sm">
+                  <span className="h-9 w-9 shrink-0 rounded-lg glass flex items-center justify-center">
                     <Linkedin size={16} />
                   </span>
                   <span className="font-medium">LinkedIn</span>
                 </span>
-                <span className="text-xs text-ink-muted">/in/sangeetha-n</span>
+                <span className="shrink-0 text-xs text-ink-muted whitespace-nowrap sm:whitespace-normal sm:text-end">/in/sangeetha-n</span>
               </a>
 
               <a
                 href={profile.socials.github}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full flex items-center justify-between gap-3 rounded-xl glass px-4 py-3 hover:bg-white/[0.05] transition"
+                className="w-full flex items-center justify-between gap-3 rounded-xl glass px-4 py-3 hover:bg-white/[0.05] transition min-w-0"
               >
-                <span className="flex items-center gap-3 text-sm">
-                  <span className="h-9 w-9 rounded-lg glass flex items-center justify-center">
+                <span className="flex min-w-0 flex-1 items-center gap-3 text-sm">
+                  <span className="h-9 w-9 shrink-0 rounded-lg glass flex items-center justify-center">
                     <Github size={16} />
                   </span>
                   <span className="font-medium">GitHub</span>
                 </span>
-                <span className="text-xs text-ink-muted">/sangeethanickson</span>
+                <span className="shrink-0 text-xs text-ink-muted whitespace-nowrap sm:whitespace-normal sm:text-end">/sangeethanickson</span>
               </a>
 
               <a
                 href={profile.resumeUrl}
                 download
-                className="w-full flex items-center justify-between gap-3 rounded-xl bg-gradient-accent px-4 py-3 text-white transition hover:brightness-110"
+                className="w-full flex items-center justify-between gap-3 rounded-xl bg-gradient-accent px-4 py-3 text-white transition hover:brightness-110 min-w-0"
               >
-                <span className="flex items-center gap-3 text-sm font-medium">
+                <span className="flex min-w-0 flex-1 items-center gap-3 text-sm font-medium">
                   <Download size={16} /> Download Resume
                 </span>
-                <span className="text-xs opacity-80">PDF · ~120kb</span>
+                <span className="shrink-0 text-xs opacity-80 whitespace-nowrap">PDF · ~120kb</span>
               </a>
             </div>
           </motion.div>
 
-          <motion.form variants={fadeUp} onSubmit={onSubmit} className="card">
+          <motion.form variants={fadeUp} onSubmit={onSubmit} className="card min-w-0">
             <h3 className="font-display text-lg font-semibold">Send a message</h3>
             <p className="mt-2 text-sm text-ink-muted">Tell me about your project, role, or idea.</p>
 
