@@ -41,7 +41,7 @@ Built with React 18, Vite, Tailwind CSS, Framer Motion, Lenis smooth scroll, and
 
 ```
 src/
-├── animations/        # Reusable Framer Motion variants
+├── animations/        # Reusable Framer Motion variants 
 ├── components/
 │   ├── common/        # Loader, Particles, ScrollProgress, CursorGlow, CommandPalette, ...
 │   ├── layout/        # Navbar, Footer
