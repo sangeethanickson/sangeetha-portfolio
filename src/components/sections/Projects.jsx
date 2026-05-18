@@ -101,26 +101,6 @@ function ProjectCard({ p, index }) {
           <span key={t} className="chip text-[10px] !py-0.5">{t}</span>
         ))}
       </div>
-
-      {/* Actions */}
-      <div className="mt-6 flex items-center gap-2 pt-4 border-t border-white/[0.06]">
-        <button
-          type="button"
-          className="inline-flex items-center gap-1.5 text-xs text-ink-muted hover:text-white transition"
-          aria-label="View case study"
-        >
-          <ArrowUpRight size={14} /> Case study
-        </button>
-        <span className="h-3 w-px bg-white/10" />
-        <button
-          type="button"
-          className="inline-flex items-center gap-1.5 text-xs text-ink-muted hover:text-white transition"
-          aria-label="View on GitHub"
-        >
-          <Github size={14} /> Source
-        </button>
-        <span className="ml-auto text-[10px] text-ink-dim">{String(index + 1).padStart(2, '0')}</span>
-      </div>
     </motion.article>
   );
 }
